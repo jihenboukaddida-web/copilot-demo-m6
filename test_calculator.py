@@ -14,6 +14,7 @@ def test_divide():
     assert divide(10, 2) == 5
 
 
-def test_divide_by_zero():
-    with pytest.raises(ValueError):
-        divide(10, 0)
+@pytest.mark.parametrize("divisor", [0, 0.0, -0.0])
+def test_divide_by_zero(divisor):
+    with pytest.raises(ValueError, match="Cannot divide by zero"):
+        divide(10, divisor)
